@@ -19,7 +19,7 @@
   </div>
 
   <div class="form-group has-feedback">
-    <%= form.label :email %>
+    <%= form.label :email, "Email<span class='required'>*</span>".html_safe, {:class => 'control-label' }  %>
     <%= form.email_field :email, {:class => 'form-control', data: { error: 'email address is invalid' },  required: { nil: nil } } %>
     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
     <div class="help-block with-errors"></div>
