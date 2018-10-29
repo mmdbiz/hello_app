@@ -1,0 +1,12 @@
+/* @import "bootstrap-sprockets";
+@import "bootstrap"; */
+
+// Your variable overrides
+$body-bg: #f00;
+
+/* universal */
+
+body {
+  padding-top: 0;
+ /* background-color: $body-bg; */
+}

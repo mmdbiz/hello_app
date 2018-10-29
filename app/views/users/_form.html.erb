@@ -1,4 +1,4 @@
-<%= form_with(model: user, local: true) do |form| %>
+<%= form_with(model: user, local: true, class: 'that', data: { toggle: 'validator' } ) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,17 +11,21 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-group has-feedback">
+    <%= form.label :name, "Name<span class='required'>*</span>".html_safe, {:class => 'control-label' } %>
+    <%= form.text_field :name, {:class => 'form-control',  required: { nil: nil } } %>
+    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+    <div class="help-block with-errors"></div>
   </div>
 
-  <div class="field">
+  <div class="form-group has-feedback">
     <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.email_field :email, {:class => 'form-control', data: { error: 'email address is invalid' },  required: { nil: nil } } %>
+    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+    <div class="help-block with-errors"></div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit( {:class => 'btn btn-primary'} ) %>
   </div>
 <% end %>
