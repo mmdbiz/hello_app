@@ -13,8 +13,11 @@
  */
 
 // External libraries
-@import "bootstrap-sprockets";
+//@import "bootstrap-sprockets";
 @import "bootstrap";
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
  // Graphical variables
 @import "config/fonts";

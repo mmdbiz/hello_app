@@ -4,3 +4,23 @@
 .required {
 	color: $red;
 }
+.cursor-disabled {
+    cursor: not-allowed !important;    
+    opacity: .5;
+}
+.valid-feedback.feedback-icon,
+.invalid-feedback.feedback-icon {
+	i {
+		font-style: normal;
+    	font-weight: bold;
+	}
+    position: absolute;
+    width: auto;
+    bottom: 10px;
+    right: 10px;
+    margin-top: 0;
+}
+
+.invalid-feedback.feedback-icon {
+    bottom: 30px;
+}

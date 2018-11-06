@@ -1,4 +1,4 @@
-<%= form_with(model: user, local: true, class: 'that', data: { toggle: 'validator' } ) do |form| %>
+<%= form_with(model: user, local: true, class: 'needs-validation', :html => {:novalidate => 'novalidate'} ) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,21 +11,65 @@
     </div>
   <% end %>
 
-  <div class="form-group has-feedback">
+  <div class="form-group position-relative">
     <%= form.label :name, "Name<span class='required'>*</span>".html_safe, {:class => 'control-label' } %>
     <%= form.text_field :name, {:class => 'form-control',  required: { nil: nil } } %>
     <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-    <div class="help-block with-errors"></div>
+    <div class="invalid-feedback">name is required!</div>
+
+    <div class="valid-feedback feedback-icon">
+      <%= icon('fas', 'check') %>
+    </div>
+    <div class="invalid-feedback feedback-icon">
+      <%= icon('fas', 'times') %>
+    </div>
+
   </div>
 
-  <div class="form-group has-feedback">
+  <div class="form-group position-relative">
     <%= form.label :email, "Email<span class='required'>*</span>".html_safe, {:class => 'control-label' }  %>
-    <%= form.email_field :email, {:class => 'form-control', data: { error: 'email address is invalid' },  required: { nil: nil } } %>
-    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-    <div class="help-block with-errors"></div>
+    <%= form.email_field :email, {:class => 'form-control', data: { error: 'email address is invalid' },  required: { nil: nil } }  %>
+    
+    <div class="invalid-feedback">email address is invalid!</div>
+
+    <div class="valid-feedback feedback-icon">
+      <%= icon('fas', 'check') %>
+    </div>
+    <div class="invalid-feedback feedback-icon">
+        <%= icon('fas', 'times') %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= form.submit( {:class => 'btn btn-primary'} ) %>
+    <%= form.submit( {:class => 'btn btn-primary cursor-disabled'} ) %>
   </div>
+
+
+<script type="text/javascript">
+  if ($( 'form' ).hasClass('needs-validation')) {
+
+    // trigger validation whenever the submit button has been clicked
+    $('form').submit(function (event) {
+      if ($('form')[0].checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      $('form').addClass('was-validated');
+    });
+
+    // trigger validation whenever an input field has changed
+    $('input').on('click', function() {
+          $('form').addClass('was-validated');
+          if ($('form')[0].checkValidity() ) {
+            $(".btn").removeClass("cursor-disabled");
+            //alert('form is valid');
+          } else {
+            $(".btn").addClass("cursor-disabled");
+            //alert('form is invalid');
+          }
+    });
+  } else {
+    $(".btn").removeClass("cursor-disabled");
+  }
+</script>
 <% end %>
